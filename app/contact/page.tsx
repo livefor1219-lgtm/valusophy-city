@@ -9,17 +9,45 @@ export default function ContactPage() {
     name: '',
     email: '',
     message: '',
-    interests: [] as string[],
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Supabase로 데이터 저장
-    console.log('입주 신청:', formData);
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    setError('');
+
+    try {
+
+      // API route를 통해 신청서 저장 및 처리
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || '신청서 제출에 실패했습니다.');
+      }
+
+      const result = await response.json();
+      console.log('신청서 제출 성공:', result);
+
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 3000);
+      
+      // 폼 리셋
+      setFormData({ name: '', email: '', message: '' });
+    } catch (err: any) {
+      setError('신청서 제출에 실패했습니다. 다시 시도해주세요.');
+      console.error(err);
+    }
   };
 
   return (
@@ -49,7 +77,9 @@ export default function ContactPage() {
                 <Mail className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" />
                 <div>
                   <div className="text-gray-400 text-sm">Email</div>
-                  <div className="text-white">info@valusophy.city</div>
+                  <a href="mailto:valusophy.page@gmail.com" className="text-white hover:text-cyan-400 transition-colors">
+                    valusophy.page@gmail.com
+                  </a>
                 </div>
               </div>
 
@@ -85,6 +115,18 @@ export default function ContactPage() {
           {/* Application Form */}
           <div className="p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
             <h2 className="text-2xl font-bold text-white mb-6">신청서 작성</h2>
+            
+            {error && (
+              <div className="mb-6 p-4 rounded-lg bg-red-500/20 border border-red-500/30 text-red-400 text-sm">
+                {error}
+              </div>
+            )}
+
+            {submitted && (
+              <div className="mb-6 p-4 rounded-lg bg-green-500/20 border border-green-500/30 text-green-400 text-sm">
+                신청서가 성공적으로 제출되었습니다! 곧 연락드리겠습니다.
+              </div>
+            )}
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
