@@ -79,13 +79,21 @@ export async function POST(request: NextRequest) {
     try {
       if (process.env.RESEND_API_KEY) {
         const resend = new Resend(process.env.RESEND_API_KEY);
-        await resend.emails.send({
-          from: 'Valusophy City <noreply@valusophy.city>',
+        
+        // 도메인 등록 전: onboarding@resend.dev 사용
+        // 도메인 등록 후: noreply@yourdomain.com 사용 가능
+        const { data, error: emailError } = await resend.emails.send({
+          from: 'Valusophy City <onboarding@resend.dev>',
           to: 'valusophy.page@gmail.com',
           subject: emailSubject,
           html: emailHtml,
         });
-        console.log('이메일 전송 성공');
+
+        if (emailError) {
+          console.error('이메일 전송 실패:', emailError);
+        } else {
+          console.log('이메일 전송 성공:', data);
+        }
       } else {
         console.log('이메일 전송 건너뜀 (RESEND_API_KEY 없음)');
       }
