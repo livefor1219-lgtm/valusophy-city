@@ -46,12 +46,21 @@ npm install
 
 ### 2. 환경 변수 설정
 
-`.env.local` 파일을 생성하고 Supabase 설정을 추가하세요:
+`.env.local` 파일을 생성하고 다음 설정을 추가하세요:
 
 ```env
+# Supabase
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+# Resend (이메일 기능, 선택사항)
+RESEND_API_KEY=your_resend_api_key
 ```
+
+**이메일 기능을 사용하려면:**
+1. https://resend.com 에서 무료 계정 생성
+2. API Keys에서 새 키 생성
+3. `RESEND_API_KEY` 환경 변수에 추가
 
 ### 3. 데이터베이스 설정
 
