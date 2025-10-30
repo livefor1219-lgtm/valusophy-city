@@ -21,7 +21,7 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2B0727] via-[#BA8E4C] to-[#2B0727] flex items-center justify-center">
               <span className="text-white font-bold text-xl">V</span>
             </div>
             <span className="text-white font-semibold text-lg">
