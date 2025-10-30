@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 
@@ -21,8 +22,15 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2B0727] via-[#BA8E4C] to-[#2B0727] flex items-center justify-center">
-              <span className="text-white font-bold text-xl">V</span>
+            <div className="w-10 h-10 rounded-lg bg-black/40 border border-white/10 overflow-hidden relative">
+              <Image
+                src="/logo-seal.png"
+                alt="Valusophy City seal"
+                fill
+                sizes="40px"
+                priority
+                className="object-contain"
+              />
             </div>
             <span className="text-white font-semibold text-lg">
               Valusophy City
