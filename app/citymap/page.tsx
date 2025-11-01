@@ -10,14 +10,14 @@ export default function CityMapPage() {
   ]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-black pt-32 pb-20 px-6">
+    <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black pt-32 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#2B0727] bg-clip-text text-transparent font-display">
             City Map
           </h1>
           <p className="text-xl text-gray-400">
@@ -26,7 +26,7 @@ export default function CityMapPage() {
         </motion.div>
 
         {/* 3D Canvas Placeholder */}
-        <div className="relative mb-12 h-[600px] rounded-2xl overflow-hidden bg-gradient-to-br from-purple-900/40 to-black border border-white/10">
+        <div className="relative mb-12 h-[600px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#2B0727]/40 to-black border border-[#BA8E4C]/20">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
               <div className="text-8xl mb-4">🏙️</div>
@@ -44,7 +44,7 @@ export default function CityMapPage() {
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div
                   key={i}
-                  className="w-16 h-16 bg-white/10 rounded hover:bg-purple-500/30 transition-colors cursor-pointer flex items-center justify-center text-white/60 text-sm"
+                  className="w-16 h-16 bg-white/10 rounded hover:bg-[#2B0727]/40 transition-colors cursor-pointer flex items-center justify-center text-white/60 text-sm"
                 >
                   {i}층
                 </div>
@@ -106,7 +106,7 @@ function StatCard({ icon, value, label }: any) {
   return (
     <div className="p-6 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
       <div className="flex items-center gap-4">
-        <div className="text-cyan-400">{icon}</div>
+        <div className="text-[#BA8E4C]">{icon}</div>
         <div>
           <div className="text-3xl font-bold text-white">{value}</div>
           <div className="text-gray-400 text-sm">{label}</div>

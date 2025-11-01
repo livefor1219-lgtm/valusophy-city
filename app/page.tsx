@@ -7,7 +7,7 @@ import Navigation from '@/components/Navigation';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-black">
+    <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black">
       <Navigation />
       
       <main className="pt-32 pb-20 px-6">
@@ -18,7 +18,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-7xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <h1 className="text-7xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#2B0727] bg-clip-text text-transparent">
               Valusophy City
             </h1>
             <p className="text-2xl md:text-3xl text-gray-300 mb-8 font-light">
@@ -32,7 +32,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/contact"
-                className="group px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-semibold hover:scale-105 transition-transform flex items-center justify-center gap-2"
+                className="group px-8 py-4 bg-gradient-to-r from-[#2B0727] to-[#BA8E4C] rounded-full text-white font-semibold hover:scale-105 transition-transform flex items-center justify-center gap-2"
               >
                 입주 신청하기
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" />
@@ -101,7 +101,7 @@ function FeatureCard({ icon, title, description }: any) {
       transition={{ duration: 0.5 }}
       className="p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors"
     >
-      <div className="text-cyan-400 mb-4">{icon}</div>
+      <div className="text-[#BA8E4C] mb-4">{icon}</div>
       <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
       <p className="text-gray-400 leading-relaxed">{description}</p>
     </motion.div>
@@ -117,7 +117,7 @@ function StatCard({ number, label }: { number: string; label: string }) {
       transition={{ duration: 0.5 }}
       className="text-center"
     >
-      <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-2">
+      <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-[#BA8E4C] to-[#2B0727] bg-clip-text text-transparent mb-2">
         {number}
       </div>
       <div className="text-gray-400">{label}</div>

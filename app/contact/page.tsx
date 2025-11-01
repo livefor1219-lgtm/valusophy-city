@@ -51,7 +51,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-black pt-32 pb-20 px-6">
+    <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black pt-32 pb-20 px-6">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -59,7 +59,7 @@ export default function ContactPage() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#2B0727] bg-clip-text text-transparent">
             입주 신청
           </h1>
           <p className="text-xl text-gray-400">
@@ -74,17 +74,17 @@ export default function ContactPage() {
               <h2 className="text-2xl font-bold text-white mb-6">Contact Info</h2>
               
               <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-                <Mail className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" />
+                <Mail className="w-6 h-6 text-[#BA8E4C] flex-shrink-0 mt-1" />
                 <div>
                   <div className="text-gray-400 text-sm">Email</div>
-                  <a href="mailto:valusophy.page@gmail.com" className="text-white hover:text-cyan-400 transition-colors">
+                  <a href="mailto:valusophy.page@gmail.com" className="text-white hover:text-[#BA8E4C] transition-colors">
                     valusophy.page@gmail.com
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-                <MapPin className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" />
+                <MapPin className="w-6 h-6 text-[#BA8E4C] flex-shrink-0 mt-1" />
                 <div>
                   <div className="text-gray-400 text-sm">Location</div>
                   <div className="text-white">Digital Metaverse</div>
@@ -92,7 +92,7 @@ export default function ContactPage() {
               </div>
 
               <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-                <Phone className="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" />
+                <Phone className="w-6 h-6 text-[#BA8E4C] flex-shrink-0 mt-1" />
                 <div>
                   <div className="text-gray-400 text-sm">Support</div>
                   <div className="text-white">24/7 Available</div>
@@ -100,7 +100,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="p-6 rounded-xl bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/20">
+            <div className="p-6 rounded-xl bg-gradient-to-br from-[#2B0727]/30 to-black/30 border border-[#BA8E4C]/20">
               <h3 className="text-xl font-bold text-white mb-3">입주 혜택</h3>
               <ul className="space-y-2 text-gray-300">
                 <li>• 개인 펜트하우스 공간 제공</li>
@@ -117,13 +117,13 @@ export default function ContactPage() {
             <h2 className="text-2xl font-bold text-white mb-6">신청서 작성</h2>
             
             {error && (
-              <div className="mb-6 p-4 rounded-lg bg-red-500/20 border border-red-500/30 text-red-400 text-sm">
+              <div className="mb-6 p-4 rounded-lg bg-[#2B0727]/20 border border-[#2B0727]/30 text-[#2B0727] text-sm">
                 {error}
               </div>
             )}
 
             {submitted && (
-              <div className="mb-6 p-4 rounded-lg bg-green-500/20 border border-green-500/30 text-green-400 text-sm">
+              <div className="mb-6 p-4 rounded-lg bg-[#BA8E4C]/20 border border-[#BA8E4C]/30 text-[#BA8E4C] text-sm">
                 신청서가 성공적으로 제출되었습니다! 곧 연락드리겠습니다.
               </div>
             )}
@@ -174,7 +174,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={submitted}
-                className="w-full px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg text-white font-semibold hover:scale-[1.02] transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full px-8 py-4 bg-gradient-to-r from-[#2B0727] to-[#BA8E4C] rounded-lg text-white font-semibold hover:scale-[1.02] transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {submitted ? '신청 완료!' : '입주 신청하기'}
                 <Send className="w-5 h-5" />

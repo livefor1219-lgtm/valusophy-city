@@ -16,14 +16,14 @@ export default function ProjectsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-black pt-32 pb-20 px-6">
+    <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black pt-32 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#2B0727] bg-clip-text text-transparent">
             Projects
           </h1>
           <p className="text-xl text-gray-400">
@@ -35,7 +35,7 @@ export default function ProjectsPage() {
         <div className="mb-12">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-white">진행 중인 프로젝트</h2>
-            <button className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg text-white font-semibold hover:scale-105 transition-transform">
+            <button className="px-6 py-3 bg-gradient-to-r from-[#2B0727] to-[#BA8E4C] rounded-lg text-white font-semibold hover:scale-105 transition-transform">
               + 새 프로젝트
             </button>
           </div>
@@ -48,8 +48,8 @@ export default function ProjectsPage() {
                 className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors cursor-pointer"
               >
                 <div className="mb-4">
-                  <div className="w-full h-32 rounded-lg bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/20 flex items-center justify-center">
-                    <Rocket className="w-12 h-12 text-purple-400" />
+                  <div className="w-full h-32 rounded-lg bg-gradient-to-br from-[#2B0727]/30 to-black/30 border border-[#BA8E4C]/20 flex items-center justify-center">
+                    <Rocket className="w-12 h-12 text-[#BA8E4C]" />
                   </div>
                 </div>
                 
@@ -69,7 +69,7 @@ export default function ProjectsPage() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-semibold">
+                  <span className="px-3 py-1 rounded-full bg-[#BA8E4C]/20 text-[#BA8E4C] text-xs font-semibold">
                     모집 중
                   </span>
                 </div>
@@ -78,7 +78,7 @@ export default function ProjectsPage() {
                   {project.members.map((member, idx) => (
                     <div
                       key={idx}
-                      className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center text-white text-sm font-bold"
+                      className="w-8 h-8 rounded-full bg-gradient-to-br from-[#BA8E4C] to-[#2B0727] flex items-center justify-center text-white text-sm font-bold"
                       title={member}
                     >
                       {member.charAt(0)}

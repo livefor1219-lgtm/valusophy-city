@@ -38,10 +38,10 @@ export async function POST(request: NextRequest) {
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
         <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5; padding: 20px;">
-          <div style="max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+          <div style="max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #2B0727 0%, #BA8E4C 100%); padding: 40px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
             
             <div style="background-color: white; padding: 40px; border-radius: 8px;">
-              <h1 style="color: #333; font-size: 28px; margin-bottom: 10px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+              <h1 style="color: #333; font-size: 28px; margin-bottom: 10px; background: linear-gradient(135deg, #BA8E4C 0%, #2B0727 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
                 🏙️ 발루소사이어시티 입주 신청
               </h1>
               
@@ -49,17 +49,17 @@ export async function POST(request: NextRequest) {
                 <h2 style="color: #333; font-size: 20px; margin-bottom: 20px;">신청자 정보</h2>
                 
                 <div style="margin-bottom: 20px;">
-                  <strong style="color: #667eea; display: block; margin-bottom: 5px;">이름</strong>
+                  <strong style="color: #BA8E4C; display: block; margin-bottom: 5px;">이름</strong>
                   <p style="color: #666; margin: 0; font-size: 16px;">${name}</p>
                 </div>
                 
                 <div style="margin-bottom: 20px;">
-                  <strong style="color: #667eea; display: block; margin-bottom: 5px;">이메일</strong>
+                  <strong style="color: #BA8E4C; display: block; margin-bottom: 5px;">이메일</strong>
                   <p style="color: #666; margin: 0; font-size: 16px;">${email}</p>
                 </div>
                 
                 <div style="margin-bottom: 20px;">
-                  <strong style="color: #667eea; display: block; margin-bottom: 5px;">메시지</strong>
+                  <strong style="color: #BA8E4C; display: block; margin-bottom: 5px;">메시지</strong>
                   <p style="color: #666; margin: 0; font-size: 16px; white-space: pre-wrap; line-height: 1.6;">${message}</p>
                 </div>
               </div>

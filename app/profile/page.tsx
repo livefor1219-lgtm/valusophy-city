@@ -19,7 +19,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-black pt-32 pb-20 px-6">
+    <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black pt-32 pb-20 px-6">
       <div className="max-w-6xl mx-auto">
         {/* 펜트하우스 헤더 */}
         <motion.div
@@ -27,13 +27,13 @@ export default function ProfilePage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <div className="p-8 rounded-2xl bg-gradient-to-br from-cyan-900/30 via-purple-900/30 to-pink-900/30 border border-cyan-500/20">
+          <div className="p-8 rounded-2xl bg-gradient-to-br from-[#2B0727]/30 to-black/30 border border-[#BA8E4C]/20">
             <div className="flex items-center gap-6 mb-6">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 flex items-center justify-center text-white text-4xl font-bold">
+              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#BA8E4C] to-[#2B0727] flex items-center justify-center text-white text-4xl font-bold">
                 유
               </div>
               <div>
-                <h1 className="text-4xl font-bold text-white mb-2">내 펜트하우스</h1>
+                <h1 className="text-4xl font-bold text-white mb-2 font-display">내 펜트하우스</h1>
                 <p className="text-gray-400">발루루체 A동 12층 1204호</p>
               </div>
             </div>
@@ -66,21 +66,21 @@ export default function ProfilePage() {
               <div className="flex gap-3">
                 <button
                   onClick={() => handleUpload('image')}
-                  className="flex-1 p-4 rounded-lg bg-purple-900/30 border border-purple-500/20 hover:bg-purple-900/40 transition-colors flex flex-col items-center gap-2 text-white"
+                  className="flex-1 p-4 rounded-lg bg-[#2B0727]/30 border border-[#BA8E4C]/20 hover:bg-[#2B0727]/40 transition-colors flex flex-col items-center gap-2 text-white"
                 >
                   <ImageIcon className="w-6 h-6" />
                   <span className="text-sm">이미지</span>
                 </button>
                 <button
                   onClick={() => handleUpload('video')}
-                  className="flex-1 p-4 rounded-lg bg-purple-900/30 border border-purple-500/20 hover:bg-purple-900/40 transition-colors flex flex-col items-center gap-2 text-white"
+                  className="flex-1 p-4 rounded-lg bg-[#2B0727]/30 border border-[#BA8E4C]/20 hover:bg-[#2B0727]/40 transition-colors flex flex-col items-center gap-2 text-white"
                 >
                   <Video className="w-6 h-6" />
                   <span className="text-sm">비디오</span>
                 </button>
                 <button
                   onClick={() => handleUpload('text')}
-                  className="flex-1 p-4 rounded-lg bg-purple-900/30 border border-purple-500/20 hover:bg-purple-900/40 transition-colors flex flex-col items-center gap-2 text-white"
+                  className="flex-1 p-4 rounded-lg bg-[#2B0727]/30 border border-[#BA8E4C]/20 hover:bg-[#2B0727]/40 transition-colors flex flex-col items-center gap-2 text-white"
                 >
                   <FileText className="w-6 h-6" />
                   <span className="text-sm">텍스트</span>
@@ -97,7 +97,7 @@ export default function ProfilePage() {
                     className="p-6 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#BA8E4C] to-[#2B0727] flex items-center justify-center">
                         {post.type === 'image' ? <ImageIcon className="w-6 h-6 text-white" /> :
                          post.type === 'video' ? <Video className="w-6 h-6 text-white" /> :
                          <FileText className="w-6 h-6 text-white" />}
@@ -108,10 +108,10 @@ export default function ProfilePage() {
                       </div>
                     </div>
                     <div className="mt-4 flex items-center gap-4 text-gray-400 text-sm">
-                      <button className="flex items-center gap-1 hover:text-pink-400">
+                      <button className="flex items-center gap-1 hover:text-[#BA8E4C]">
                         <Heart className="w-4 h-4" /> 0
                       </button>
-                      <button className="flex items-center gap-1 hover:text-cyan-400">
+                      <button className="flex items-center gap-1 hover:text-[#BA8E4C]">
                         <Eye className="w-4 h-4" /> 0
                       </button>
                     </div>
@@ -143,9 +143,9 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/20">
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-[#2B0727]/30 to-black/30 border border-[#BA8E4C]/20">
               <h3 className="text-lg font-semibold text-white mb-4">Ma'at Index</h3>
-              <div className="text-5xl font-bold text-cyan-400 mb-2">42</div>
+              <div className="text-5xl font-bold text-[#BA8E4C] mb-2">42</div>
               <p className="text-gray-400 text-sm">
                 창작 활동 지수가 증가하고 있습니다.
               </p>

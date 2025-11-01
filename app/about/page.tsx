@@ -5,7 +5,7 @@ import { Sparkles, Heart, Globe, Lightbulb } from 'lucide-react';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-purple-900/20 to-black pt-32 pb-20 px-6">
+    <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black pt-32 pb-20 px-6">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -13,7 +13,7 @@ export default function AboutPage() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#2B0727] bg-clip-text text-transparent">
             About Valusophy
           </h1>
           <p className="text-xl text-gray-400">
@@ -29,7 +29,7 @@ export default function AboutPage() {
         >
           <section className="p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
             <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-              <Globe className="w-8 h-8 text-cyan-400" />
+              <Globe className="w-8 h-8 text-[#BA8E4C]" />
               철학과 비전
             </h2>
             <p className="text-gray-300 leading-relaxed text-lg">
@@ -42,26 +42,26 @@ export default function AboutPage() {
 
           <section className="p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
             <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-              <Sparkles className="w-8 h-8 text-purple-400" />
+              <Sparkles className="w-8 h-8 text-[#BA8E4C]" />
               핵심 가치
             </h2>
             <div className="space-y-4 text-gray-300">
               <div className="flex items-start gap-4">
-                <div className="w-2 h-2 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-[#BA8E4C] mt-2 flex-shrink-0" />
                 <div>
                   <strong className="text-white">창작의 자유</strong>
                   <p className="text-gray-400">어떤 형태의 창작물도 자유롭게 표현하고 공유할 수 있습니다.</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-2 h-2 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-[#2B0727] mt-2 flex-shrink-0" />
                 <div>
                   <strong className="text-white">커뮤니티 협업</strong>
                   <p className="text-gray-400">같은 관심사를 가진 사람들과 협업하고 함께 성장합니다.</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-2 h-2 rounded-full bg-pink-400 mt-2 flex-shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-[#BA8E4C] mt-2 flex-shrink-0" />
                 <div>
                   <strong className="text-white">시각적 경험</strong>
                   <p className="text-gray-400">창작 활동이 자동으로 아름답게 시각화되어 감상을 돕습니다.</p>
@@ -70,9 +70,9 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section className="p-8 rounded-2xl bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/20">
+          <section className="p-8 rounded-2xl bg-gradient-to-br from-[#2B0727]/30 to-black/30 border border-[#BA8E4C]/20">
             <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-              <Lightbulb className="w-8 h-8 text-yellow-400" />
+              <Lightbulb className="w-8 h-8 text-[#BA8E4C]" />
               발루루체의 의미
             </h2>
             <p className="text-gray-300 leading-relaxed text-lg">
@@ -85,7 +85,7 @@ export default function AboutPage() {
 
           <section className="p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
             <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-              <Heart className="w-8 h-8 text-pink-400" />
+              <Heart className="w-8 h-8 text-[#BA8E4C]" />
               Ma'at Index (발루소피 지수)
             </h2>
             <p className="text-gray-300 leading-relaxed text-lg">
