@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const navItems = [
   { name: 'HOME', path: '/' },
@@ -20,15 +21,19 @@ export default function Navigation() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-black/40 border border-white/10 overflow-hidden flex items-center justify-center">
-              <img
+          <Link href="/" className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-lg bg-transparent overflow-hidden flex items-center justify-center p-1.5 relative">
+              <Image
                 src="/logo-seal.svg"
                 alt="Valusophy City seal"
-                className="w-full h-full object-contain"
+                width={48}
+                height={48}
+                className="object-contain"
+                unoptimized
+                priority
               />
             </div>
-            <span className="text-white font-semibold text-lg">
+            <span className="text-white font-semibold text-lg font-display">
               Valusophy City
             </span>
           </Link>

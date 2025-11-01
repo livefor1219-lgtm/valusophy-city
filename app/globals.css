@@ -12,6 +12,10 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
+  --font-family-sans: var(--font-sans);
+  --font-family-display: var(--font-display);
+  --color-brand-primary: #2B0727;
+  --color-brand-accent: #BA8E4C;
 }
 
 /* Keep a consistent dark theme regardless of system */

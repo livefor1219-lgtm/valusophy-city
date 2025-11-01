@@ -18,7 +18,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-7xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#2B0727] bg-clip-text text-transparent">
+            <h1 className="text-7xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#2B0727] bg-clip-text text-transparent font-display">
               Valusophy City
             </h1>
             <p className="text-2xl md:text-3xl text-gray-300 mb-8 font-light">
