@@ -33,11 +33,16 @@ export default function CreateProjectModal({ isOpen, onClose, user, onSuccess }:
       const supabase = createClientComponentClient();
 
       // resident 찾기 또는 생성
-      let { data: resident } = await supabase
+      let { data: resident, error: residentError } = await supabase
         .from('residents')
         .select('id')
         .eq('auth_user_id', user.id)
         .single();
+
+      // resident를 찾지 못한 경우 (에러가 없고 data만 null인 경우는 정상 - 새로 생성)
+      if (residentError && residentError.code !== 'PGRST116') {
+        throw new Error('입주민 정보를 불러오는 중 오류가 발생했습니다.');
+      }
 
       if (!resident) {
         // resident가 없으면 생성
@@ -57,7 +62,21 @@ export default function CreateProjectModal({ isOpen, onClose, user, onSuccess }:
         if (createError) {
           throw createError;
         }
+
+        if (!newResident) {
+          setError('입주민 정보를 생성하는 데 실패했습니다. 다시 시도해주세요.');
+          setLoading(false);
+          return;
+        }
+
         resident = newResident;
+      }
+
+      // resident가 여전히 null인 경우 안전 장치
+      if (!resident || !resident.id) {
+        setError('입주민 정보가 필요합니다. 다시 시도해주세요.');
+        setLoading(false);
+        return;
       }
 
       // 프로젝트 생성
