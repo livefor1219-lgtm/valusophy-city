@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, Reorder } from 'framer-motion';
 import { 
   Plus, GripVertical, Type, Image as ImageIcon, 
@@ -427,12 +427,18 @@ function BlockEditor({
 function renderBlockPreview(block: Block) {
   switch (block.type) {
     case 'header':
-      const HeaderTag = `h${block.content.level || 1}` as keyof JSX.IntrinsicElements;
-      return (
-        <HeaderTag className="text-white font-bold">
-          {block.content.text || '빈 헤더'}
-        </HeaderTag>
-      );
+      const level = block.content.level || 1;
+      const headerText = block.content.text || '빈 헤더';
+      switch (level) {
+        case 1:
+          return <h1 className="text-white font-bold">{headerText}</h1>;
+        case 2:
+          return <h2 className="text-white font-bold">{headerText}</h2>;
+        case 3:
+          return <h3 className="text-white font-bold">{headerText}</h3>;
+        default:
+          return <h1 className="text-white font-bold">{headerText}</h1>;
+      }
     case 'text':
       return (
         <p className="text-gray-300 whitespace-pre-wrap">
