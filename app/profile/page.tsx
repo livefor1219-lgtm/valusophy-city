@@ -1,11 +1,40 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Upload, Image as ImageIcon, Video, FileText, Calendar, Heart, Eye } from 'lucide-react';
+import { Upload, Image as ImageIcon, Video, FileText, Calendar, Heart, Eye, Settings } from 'lucide-react';
+import { createClientComponentClient } from '@/lib/supabase';
+import type { User } from '@supabase/supabase-js';
+import PenthouseEditor from '@/components/PenthouseEditor';
+import { useRouter } from 'next/navigation';
 
 export default function ProfilePage() {
   const [posts, setPosts] = useState<any[]>([]);
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [showEditor, setShowEditor] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const supabase = createClientComponentClient();
+    
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user);
+      setLoading(false);
+      if (!user) {
+        router.push('/');
+      }
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      if (!session?.user) {
+        router.push('/');
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [router]);
 
   const handleUpload = (type: 'image' | 'video' | 'text') => {
     // TODO: 실제 업로드 구현
@@ -18,6 +47,21 @@ export default function ProfilePage() {
     setPosts([newPost, ...posts]);
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black pt-32 pb-20 px-6">
+        <div className="max-w-6xl mx-auto text-center py-20">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#BA8E4C] mx-auto mb-4"></div>
+          <p className="text-gray-400">로딩 중...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black pt-32 pb-20 px-6">
       <div className="max-w-6xl mx-auto">
@@ -28,14 +72,23 @@ export default function ProfilePage() {
           className="mb-12"
         >
           <div className="p-8 rounded-2xl bg-gradient-to-br from-[#2B0727]/30 to-black/30 border border-[#BA8E4C]/20">
-            <div className="flex items-center gap-6 mb-6">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#BA8E4C] to-[#2B0727] flex items-center justify-center text-white text-4xl font-bold">
-                유
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-6">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#BA8E4C] to-[#2B0727] flex items-center justify-center text-white text-4xl font-bold">
+                  {user.email?.charAt(0).toUpperCase() || 'U'}
+                </div>
+                <div>
+                  <h1 className="text-4xl font-bold text-white mb-2 font-display">내 펜트하우스</h1>
+                  <p className="text-gray-400">{user.email}</p>
+                </div>
               </div>
-              <div>
-                <h1 className="text-4xl font-bold text-white mb-2 font-display">내 펜트하우스</h1>
-                <p className="text-gray-400">발루루체 A동 12층 1204호</p>
-              </div>
+              <button
+                onClick={() => setShowEditor(!showEditor)}
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white text-sm transition-colors"
+              >
+                <Settings className="w-4 h-4" />
+                {showEditor ? '보기 모드' : '편집 모드'}
+              </button>
             </div>
 
             <div className="grid grid-cols-3 gap-4">
@@ -58,7 +111,14 @@ export default function ProfilePage() {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* 메인 콘텐츠 */}
           <div className="lg:col-span-2 space-y-6">
-            <h2 className="text-2xl font-bold text-white mb-4">내 활동</h2>
+            {showEditor ? (
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-4">펜트하우스 꾸미기</h2>
+                <PenthouseEditor user={user} />
+              </div>
+            ) : (
+              <>
+                <h2 className="text-2xl font-bold text-white mb-4">내 활동</h2>
 
             {/* 업로드 버튼 */}
             <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
@@ -121,10 +181,12 @@ export default function ProfilePage() {
                 <div className="text-center py-12 text-gray-400">
                   <Calendar className="w-16 h-16 mx-auto mb-4 opacity-50" />
                   <p>아직 작성물이 없습니다.</p>
-                  <p className="text-sm mt-2">첫 창작물을 업로드해보세요!</p>
-                </div>
+                <p className="text-sm mt-2">첫 창작물을 업로드해보세요!</p>
+              </div>
               )}
             </div>
+              </>
+            )}
           </div>
 
           {/* 사이드바 */}

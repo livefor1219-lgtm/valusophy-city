@@ -6,26 +6,50 @@ export async function POST(request: NextRequest) {
   try {
     const { name, email, message } = await request.json();
 
+    // 입력 검증
+    if (!name || !email || !message) {
+      return NextResponse.json(
+        { error: '모든 필드를 입력해주세요.' },
+        { status: 400 }
+      );
+    }
+
+    // 이메일 형식 검증
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: '유효한 이메일 주소를 입력해주세요.' },
+        { status: 400 }
+      );
+    }
+
     // Supabase 클라이언트 생성
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
     // 1. Supabase에 신청서 저장
     if (supabaseUrl && supabaseKey) {
-      const supabase = createClient(supabaseUrl, supabaseKey);
-      const { error } = await supabase
-        .from('applications')
-        .insert({
-          name,
-          email,
-          message,
-          status: 'pending',
-        });
+      try {
+        const supabase = createClient(supabaseUrl, supabaseKey);
+        const { error } = await supabase
+          .from('applications')
+          .insert({
+            name,
+            email,
+            message,
+            status: 'pending',
+          });
 
-      if (error) {
-        console.error('Database error:', error);
-        // 데이터베이스 에러가 있어도 이메일 전송은 시도
+        if (error) {
+          console.error('Database error:', error);
+          // 데이터베이스 에러가 있어도 이메일 전송은 시도
+        }
+      } catch (dbError) {
+        console.error('Database connection error:', dbError);
+        // 데이터베이스 연결 실패해도 이메일 전송은 시도
       }
+    } else {
+      console.warn('Supabase credentials not found. Skipping database save.');
     }
 
     // 2. 이메일 전송 (valusophy.page@gmail.com으로 알림)
@@ -76,6 +100,8 @@ export async function POST(request: NextRequest) {
       </html>
     `;
 
+    // 이메일 전송 시도
+    let emailSent = false;
     try {
       if (process.env.RESEND_API_KEY) {
         const resend = new Resend(process.env.RESEND_API_KEY);
@@ -92,13 +118,14 @@ export async function POST(request: NextRequest) {
         if (emailError) {
           console.error('이메일 전송 실패:', emailError);
         } else {
-          console.log('이메일 전송 성공:', data);
+          console.log('이메일 전송 성공:', data?.id);
+          emailSent = true;
         }
       } else {
-        console.log('이메일 전송 건너뜀 (RESEND_API_KEY 없음)');
+        console.warn('이메일 전송 건너뜀 (RESEND_API_KEY 없음). 개발 환경에서는 정상입니다.');
       }
-    } catch (emailError) {
-      console.error('이메일 전송 실패:', emailError);
+    } catch (emailError: any) {
+      console.error('이메일 전송 실패:', emailError?.message || emailError);
       // 이메일 전송 실패해도 신청서는 저장되었으므로 계속 진행
     }
 
