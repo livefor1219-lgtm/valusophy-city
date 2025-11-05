@@ -6,10 +6,15 @@ import type { AuthError } from '@supabase/supabase-js';
 export async function signInWithGoogle() {
   const supabase = createBrowserClient();
   
+  // 환경 변수 우선, 없으면 window.location.origin 사용
+  // 이렇게 하면 Supabase 설정과 일치시킬 수 있음
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 
+                  (typeof window !== 'undefined' ? window.location.origin : '');
+  
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: `${window.location.origin}/auth/callback`,
+      redirectTo: `${siteUrl}/auth/callback`,
     },
   });
 
