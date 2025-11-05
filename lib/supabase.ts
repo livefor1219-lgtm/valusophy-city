@@ -3,10 +3,10 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 
-// 서버 사이드용 클라이언트
+// 서버 사이드용 클라이언트 (레거시 호환성)
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// 클라이언트 사이드용 클라이언트 (브라우저에서만 사용)
+// 클라이언트 사이드용 클라이언트 (브라우저에서만 사용, 레거시 호환성)
 export function createClientComponentClient() {
   if (typeof window === 'undefined') {
     throw new Error('createClientComponentClient must be called in browser context');
@@ -19,6 +19,9 @@ export function createClientComponentClient() {
     },
   });
 }
+
+// 새로운 브라우저 클라이언트 (권장)
+export { createBrowserClient } from './supabase/browser';
 
 // 타입 정의
 export interface Resident {

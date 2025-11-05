@@ -6,7 +6,7 @@ import {
   Plus, GripVertical, Type, Image as ImageIcon, 
   Video, Link2, Grid3x3, Minus, Save, Trash2 
 } from 'lucide-react';
-import { createClientComponentClient } from '@/lib/supabase';
+import { createBrowserClient } from '@/lib/supabase/browser';
 import type { User } from '@supabase/supabase-js';
 
 interface Block {
@@ -37,7 +37,7 @@ export default function PenthouseEditor({ user }: PenthouseEditorProps) {
     if (!user) return;
 
     try {
-      const supabase = createClientComponentClient();
+      const supabase = createBrowserClient();
       
       // 먼저 resident 레코드 찾기
       const { data: resident } = await supabase
@@ -75,7 +75,7 @@ export default function PenthouseEditor({ user }: PenthouseEditorProps) {
 
     setSaving(true);
     try {
-      const supabase = createClientComponentClient();
+      const supabase = createBrowserClient();
       
       const { data: resident } = await supabase
         .from('residents')
