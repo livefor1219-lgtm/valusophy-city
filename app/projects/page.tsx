@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Users, Rocket, Calendar, User } from 'lucide-react';
-import { createClientComponentClient } from '@/lib/supabase';
+import { createBrowserClient } from '@/lib/supabase/browser';
 import type { User as SupabaseUser } from '@supabase/supabase-js';
 import ProjectModal from '@/components/ProjectModal';
 import CreateProjectModal from '@/components/CreateProjectModal';
@@ -16,11 +16,18 @@ export default function ProjectsPage() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   useEffect(() => {
-    const supabase = createClientComponentClient();
+    const supabase = createBrowserClient();
     
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setUser(user);
-    });
+    const loadUser = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        setUser(user);
+      } catch (error) {
+        console.error('User fetch error:', error);
+      }
+    };
+
+    loadUser();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
@@ -33,7 +40,8 @@ export default function ProjectsPage() {
 
   const loadProjects = async () => {
     try {
-      const supabase = createClientComponentClient();
+      setLoading(true);
+      const supabase = createBrowserClient();
 
       const { data, error } = await supabase
         .from('projects')
@@ -51,11 +59,13 @@ export default function ProjectsPage() {
 
       if (error) {
         console.error('프로젝트 로드 실패:', error);
+        setProjects([]);
       } else {
         setProjects(data || []);
       }
     } catch (error) {
       console.error('로드 오류:', error);
+      setProjects([]);
     } finally {
       setLoading(false);
     }

@@ -21,49 +21,96 @@ export default function ProfilePage() {
 
   useEffect(() => {
     const supabase = createBrowserClient();
+    let mounted = true;
     
-    supabase.auth.getUser().then(async ({ data: { user } }) => {
-      setUser(user);
-      
-      if (!user) {
-        router.push('/');
-        return;
+    const loadUserData = async () => {
+      try {
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
+        
+        if (userError) {
+          console.error('User fetch error:', userError);
+          if (mounted) {
+            setLoading(false);
+            if (userError.message.includes('session')) {
+              router.push('/');
+            }
+          }
+          return;
+        }
+
+        if (!mounted) return;
+
+        setUser(user);
+        
+        if (!user) {
+          router.push('/');
+          setLoading(false);
+          return;
+        }
+
+        // resident 찾기
+        const { data: resident, error: residentError } = await supabase
+          .from('residents')
+          .select('id')
+          .eq('auth_user_id', user.id)
+          .single();
+
+        if (residentError && residentError.code !== 'PGRST116') {
+          // PGRST116은 "no rows returned" 에러 - resident가 없는 경우
+          console.error('Resident fetch error:', residentError);
+        }
+
+        if (resident && mounted) {
+          setResidentId(resident.id);
+        }
+
+        if (mounted) {
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error('Unexpected error:', error);
+        if (mounted) {
+          setLoading(false);
+        }
       }
+    };
 
-      // resident 찾기
-      const { data: resident } = await supabase
-        .from('residents')
-        .select('id')
-        .eq('auth_user_id', user.id)
-        .single();
-
-      if (resident) {
-        setResidentId(resident.id);
-      }
-
-      setLoading(false);
-    });
+    loadUserData();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (!mounted) return;
+
       setUser(session?.user ?? null);
       if (!session?.user) {
         router.push('/');
+        setLoading(false);
         return;
       }
 
-      // resident 찾기
-      const { data: resident } = await supabase
-        .from('residents')
-        .select('id')
-        .eq('auth_user_id', session.user.id)
-        .single();
+      try {
+        // resident 찾기
+        const { data: resident, error: residentError } = await supabase
+          .from('residents')
+          .select('id')
+          .eq('auth_user_id', session.user.id)
+          .single();
 
-      if (resident) {
-        setResidentId(resident.id);
+        if (residentError && residentError.code !== 'PGRST116') {
+          console.error('Resident fetch error:', residentError);
+        }
+
+        if (resident && mounted) {
+          setResidentId(resident.id);
+        }
+      } catch (error) {
+        console.error('Resident fetch error:', error);
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, [router]);
 
   const handlePostSuccess = () => {

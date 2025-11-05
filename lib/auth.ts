@@ -1,10 +1,10 @@
 'use client';
 
-import { createClientComponentClient } from './supabase';
+import { createBrowserClient } from './supabase/browser';
 import type { AuthError } from '@supabase/supabase-js';
 
 export async function signInWithGoogle() {
-  const supabase = createClientComponentClient();
+  const supabase = createBrowserClient();
   
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
@@ -21,7 +21,7 @@ export async function signInWithGoogle() {
 }
 
 export async function signOut() {
-  const supabase = createClientComponentClient();
+  const supabase = createBrowserClient();
   
   const { error } = await supabase.auth.signOut();
   
@@ -31,7 +31,7 @@ export async function signOut() {
 }
 
 export async function getCurrentUser() {
-  const supabase = createClientComponentClient();
+  const supabase = createBrowserClient();
   
   const { data: { user }, error } = await supabase.auth.getUser();
   
@@ -43,7 +43,7 @@ export async function getCurrentUser() {
 }
 
 export async function getSession() {
-  const supabase = createClientComponentClient();
+  const supabase = createBrowserClient();
   
   const { data: { session }, error } = await supabase.auth.getSession();
   
