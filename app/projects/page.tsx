@@ -16,6 +16,12 @@ export default function ProjectsPage() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   useEffect(() => {
+    // 타임아웃 설정 (10초 후 강제로 로딩 종료)
+    const timeoutId = setTimeout(() => {
+      console.warn('Projects page loading timeout - forcing load completion');
+      setLoading(false);
+    }, 10000);
+
     const supabase = createBrowserClient();
     
     const loadUser = async () => {
@@ -33,9 +39,15 @@ export default function ProjectsPage() {
       setUser(session?.user ?? null);
     });
 
-    loadProjects();
+    // loadProjects는 내부에서 setLoading을 관리하므로 여기서는 호출만
+    loadProjects().finally(() => {
+      clearTimeout(timeoutId);
+    });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      clearTimeout(timeoutId);
+      subscription.unsubscribe();
+    };
   }, []);
 
   const loadProjects = async () => {
@@ -63,7 +75,7 @@ export default function ProjectsPage() {
       } else {
         setProjects(data || []);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('로드 오류:', error);
       setProjects([]);
     } finally {

@@ -71,20 +71,39 @@ export default function PostList({ residentId, currentUserId, currentResidentId,
 
   const loadPosts = async () => {
     try {
+      setLoading(true);
+      setError('');
+      
       const url = residentId 
         ? `/api/posts?residentId=${residentId}`
         : '/api/posts';
       
-      const response = await fetch(url);
-      const result = await response.json();
+      // 타임아웃 설정 (5초)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+      
+      try {
+        const response = await fetch(url, { signal: controller.signal });
+        clearTimeout(timeoutId);
+        
+        const result = await response.json();
 
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to load posts');
+        if (!response.ok) {
+          throw new Error(result.error || 'Failed to load posts');
+        }
+
+        setPosts(result.data || []);
+      } catch (fetchError: any) {
+        clearTimeout(timeoutId);
+        if (fetchError.name === 'AbortError') {
+          throw new Error('요청 시간이 초과되었습니다. 다시 시도해주세요.');
+        }
+        throw fetchError;
       }
-
-      setPosts(result.data || []);
     } catch (err: any) {
+      console.error('Post load error:', err);
       setError(err.message || 'Failed to load posts');
+      setPosts([]); // 에러 발생 시 빈 배열로 설정
     } finally {
       setLoading(false);
     }

@@ -20,6 +20,12 @@ export default function ProfilePage() {
   const router = useRouter();
 
   useEffect(() => {
+    // 타임아웃 설정 (10초 후 강제로 로딩 종료)
+    const timeoutId = setTimeout(() => {
+      console.warn('Profile page loading timeout - forcing load completion');
+      setLoading(false);
+    }, 10000);
+
     const supabase = createBrowserClient();
     let mounted = true;
     
@@ -27,49 +33,81 @@ export default function ProfilePage() {
       try {
         const { data: { user }, error: userError } = await supabase.auth.getUser();
         
+        if (!mounted) {
+          clearTimeout(timeoutId);
+          return;
+        }
+
         if (userError) {
           console.error('User fetch error:', userError);
-          if (mounted) {
-            setLoading(false);
-            if (userError.message.includes('session')) {
-              router.push('/');
-            }
+          clearTimeout(timeoutId);
+          setLoading(false);
+          if (userError.message.includes('session') || userError.message.includes('JWT')) {
+            router.push('/');
           }
           return;
         }
 
-        if (!mounted) return;
-
         setUser(user);
         
         if (!user) {
-          router.push('/');
+          clearTimeout(timeoutId);
           setLoading(false);
+          router.push('/');
           return;
         }
 
-        // resident 찾기
-        const { data: resident, error: residentError } = await supabase
-          .from('residents')
-          .select('id')
-          .eq('auth_user_id', user.id)
-          .single();
+        // resident 찾기 또는 생성
+        try {
+          let { data: resident, error: residentError } = await supabase
+            .from('residents')
+            .select('id')
+            .eq('auth_user_id', user.id)
+            .single();
 
-        if (residentError && residentError.code !== 'PGRST116') {
-          // PGRST116은 "no rows returned" 에러 - resident가 없는 경우
-          console.error('Resident fetch error:', residentError);
-        }
+          // resident가 없으면 자동 생성
+          if (!resident && (residentError?.code === 'PGRST116' || !residentError)) {
+            console.log('Resident not found, creating new resident...');
+            const { data: newResident, error: createError } = await supabase
+              .from('residents')
+              .insert({
+                auth_user_id: user.id,
+                name: user.email?.split('@')[0] || 'User',
+                email: user.email || '',
+                apartment_number: `A${Math.floor(Math.random() * 20) + 1}-${Math.floor(Math.random() * 100) + 1}`,
+                building: 'A동',
+                floor: Math.floor(Math.random() * 20) + 1,
+              })
+              .select('id')
+              .single();
 
-        if (resident && mounted) {
-          setResidentId(resident.id);
+            if (createError) {
+              console.error('Failed to create resident:', createError);
+              // resident 생성 실패해도 계속 진행 (로딩은 종료)
+            } else if (newResident && mounted) {
+              resident = newResident;
+              setResidentId(resident.id);
+            }
+          } else if (residentError && residentError.code !== 'PGRST116') {
+            // PGRST116이 아닌 다른 에러인 경우
+            console.error('Resident fetch error:', residentError);
+          } else if (resident && mounted) {
+            // resident를 찾은 경우
+            setResidentId(resident.id);
+          }
+        } catch (residentErr) {
+          console.error('Resident fetch/create error:', residentErr);
+          // resident 조회/생성 실패해도 계속 진행 (로딩은 종료)
         }
 
         if (mounted) {
+          clearTimeout(timeoutId);
           setLoading(false);
         }
       } catch (error) {
         console.error('Unexpected error:', error);
         if (mounted) {
+          clearTimeout(timeoutId);
           setLoading(false);
         }
       }
@@ -82,8 +120,9 @@ export default function ProfilePage() {
 
       setUser(session?.user ?? null);
       if (!session?.user) {
-        router.push('/');
+        clearTimeout(timeoutId);
         setLoading(false);
+        router.push('/');
         return;
       }
 
@@ -109,6 +148,7 @@ export default function ProfilePage() {
 
     return () => {
       mounted = false;
+      clearTimeout(timeoutId);
       subscription.unsubscribe();
     };
   }, [router]);
