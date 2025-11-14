@@ -4,44 +4,55 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, Building2, Users, Sparkles, Globe } from 'lucide-react';
 import Navigation from '@/components/Navigation';
+import Hero3D from '@/components/Hero3D';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black">
       <Navigation />
       
-      <main className="pt-32 pb-20 px-6">
-        {/* Hero Section */}
-        <section className="max-w-7xl mx-auto text-center mb-32">
+      <main className="pt-20 pb-20 px-6">
+        {/* Hero Section with 3D */}
+        <section className="max-w-7xl mx-auto mb-32">
+          {/* 3D Canvas */}
+          <div className="mb-12">
+            <Hero3D />
+          </div>
+          
+          {/* Hero Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            className="text-center"
           >
-            <h1 className="text-7xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#2B0727] bg-clip-text text-transparent font-display">
+            <h1 className="text-7xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-[#D4AF37] via-[#BA8E4C] to-[#12061A] bg-clip-text text-transparent font-display">
               Valusophy City
             </h1>
-            <p className="text-2xl md:text-3xl text-gray-300 mb-8 font-light">
+            <p className="text-2xl md:text-3xl text-gray-300 mb-4 font-light">
               발루소사이어시티
             </p>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-8 leading-relaxed">
+              사유가 공간이 되고, 철학이 산업이 되는 도시
+            </p>
+            <p className="text-base text-gray-500 max-w-2xl mx-auto mb-12">
               철학적 세계관 위의 디지털 도시<br />
               각자의 삶과 창작을 시각화하는 메타 커뮤니티
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/contact"
-                className="group px-8 py-4 bg-gradient-to-r from-[#2B0727] to-[#BA8E4C] rounded-full text-white font-semibold hover:scale-105 transition-transform flex items-center justify-center gap-2"
+                href="/citymap"
+                className="group px-8 py-4 bg-gradient-to-r from-[#12061A] to-[#D4AF37] rounded-full text-white font-semibold hover:scale-105 transition-transform flex items-center justify-center gap-2 shadow-lg shadow-[#D4AF37]/20"
               >
-                입주 신청하기
+                Enter the City
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
-                href="/citymap"
-                className="px-8 py-4 border border-white/20 rounded-full text-white font-semibold hover:bg-white/10 transition-colors"
+                href="/contact"
+                className="px-8 py-4 border border-white/20 rounded-full text-white font-semibold hover:bg-white/10 transition-colors backdrop-blur-sm"
               >
-                시티맵 보기
+                입주 신청하기
               </Link>
             </div>
           </motion.div>
