@@ -1,0 +1,26 @@
+# Valusophy SocieCity – Cursor Rules Summary
+
+1. **Always load full context**  
+   - Read `CLAUDE_CONTEXT.md` before major changes.  
+   - Respect brand identity: Purple `#12061A`, Gold `#D4AF37`, Black `#0C081A`.  
+   - Maintain Neon Minimal + Glassmorphism aesthetic.
+
+2. **Architecture priorities**  
+   - Pages: Home (3D Hero), CityMap, Penthouse, Projects, Residents, About.  
+   - Ensure CityMap ↔ Penthouse ↔ Projects navigation works together.  
+   - Phase 1 focus: Auth, Supabase CRUD posts (with file upload), Residents list.
+
+3. **Tech requirements**  
+   - Framework: Next.js 15 + TypeScript, Tailwind, Framer Motion.  
+   - 3D: @react-three/fiber + drei (Hero + future CityMap/Penthouse).  
+   - Supabase for auth, DB, storage; html-to-image for exports; Lenis for smooth scroll.
+
+4. **Future phases** (keep extensible)  
+   - Phase 2: 3D CityMap interactions, search/filter, notifications.  
+   - Phase 3: AI guestbook (Anthropic Claude), Ma’at Index visualization, NFT citizen card, realtime chat.
+
+5. **When unsure**  
+   - Ask to confirm design direction with the owner.  
+   - Default to glass panels, glow edges, and gold highlights.  
+   - Ensure code stays TypeScript-strict with Supabase typings.
+
