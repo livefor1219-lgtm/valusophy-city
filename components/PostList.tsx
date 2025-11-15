@@ -236,7 +236,7 @@ export default function PostList({ residentId, currentUserId, currentResidentId,
           {/* 헤더 */}
           <div className="flex items-start justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#BA8E4C] to-[#2B0727] flex items-center justify-center text-white font-bold">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#BA8E4C] to-[#12061A] flex items-center justify-center text-white font-bold">
                 {post.residents?.name?.charAt(0) || post.residents?.email?.charAt(0) || 'U'}
               </div>
               <div>
@@ -343,7 +343,7 @@ export default function PostList({ residentId, currentUserId, currentResidentId,
                 />
                 <button
                   onClick={() => handleComment(post.id)}
-                  className="px-4 py-2 bg-gradient-to-r from-[#2B0727] to-[#BA8E4C] rounded-lg text-white font-semibold hover:opacity-90 transition-opacity"
+                  className="px-4 py-2 bg-gradient-to-r from-[#12061A] to-[#BA8E4C] rounded-lg text-white font-semibold hover:opacity-90 transition-opacity"
                 >
                   작성
                 </button>

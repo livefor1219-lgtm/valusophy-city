@@ -51,7 +51,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black pt-32 pb-20 px-6">
+    <div className="min-h-screen bg-gradient-to-br from-black via-[#12061A]/20 to-black pt-32 pb-20 px-6">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -59,7 +59,7 @@ export default function ContactPage() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#2B0727] bg-clip-text text-transparent">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#12061A] bg-clip-text text-transparent">
             입주 신청
           </h1>
           <p className="text-xl text-gray-400">
@@ -100,7 +100,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="p-6 rounded-xl bg-gradient-to-br from-[#2B0727]/30 to-black/30 border border-[#BA8E4C]/20">
+            <div className="p-6 rounded-xl bg-gradient-to-br from-[#12061A]/30 to-black/30 border border-[#BA8E4C]/20">
               <h3 className="text-xl font-bold text-white mb-3">입주 혜택</h3>
               <ul className="space-y-2 text-gray-300">
                 <li>• 개인 펜트하우스 공간 제공</li>
@@ -117,7 +117,7 @@ export default function ContactPage() {
             <h2 className="text-2xl font-bold text-white mb-6">신청서 작성</h2>
             
             {error && (
-              <div className="mb-6 p-4 rounded-lg bg-[#2B0727]/20 border border-[#2B0727]/30 text-[#2B0727] text-sm">
+              <div className="mb-6 p-4 rounded-lg bg-[#12061A]/20 border border-[#12061A]/30 text-[#12061A] text-sm">
                 {error}
               </div>
             )}
@@ -174,7 +174,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={submitted}
-                className="w-full px-8 py-4 bg-gradient-to-r from-[#2B0727] to-[#BA8E4C] rounded-lg text-white font-semibold hover:scale-[1.02] transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full px-8 py-4 bg-gradient-to-r from-[#12061A] to-[#BA8E4C] rounded-lg text-white font-semibold hover:scale-[1.02] transition-transform disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {submitted ? '신청 완료!' : '입주 신청하기'}
                 <Send className="w-5 h-5" />

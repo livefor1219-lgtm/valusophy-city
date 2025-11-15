@@ -132,7 +132,7 @@ export default function Navigation() {
                 ) : (
                   <button
                     onClick={handleLogin}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-[#2B0727] to-[#BA8E4C] hover:opacity-90 transition-opacity text-white text-sm font-semibold"
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-[#12061A] to-[#BA8E4C] hover:opacity-90 transition-opacity text-white text-sm font-semibold"
                   >
                     <LogIn className="w-4 h-4" />
                     <span className="hidden md:inline">Google 로그인</span>

@@ -3,7 +3,7 @@
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;
-  --brand-primary: #2B0727;
+  --brand-primary: #12061A;
   --brand-accent: #BA8E4C;
 }
 
@@ -14,7 +14,7 @@
   --font-display: var(--font-display);
   --font-family-sans: var(--font-sans);
   --font-family-display: var(--font-display);
-  --color-brand-primary: #2B0727;
+  --color-brand-primary: #12061A;
   --color-brand-accent: #BA8E4C;
 }
 

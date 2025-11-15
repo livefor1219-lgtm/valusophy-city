@@ -6,6 +6,7 @@ import { User, Users, TrendingUp } from 'lucide-react';
 import { createBrowserClient } from '@/lib/supabase/browser';
 import Link from 'next/link';
 import Image from 'next/image';
+import CityMap3D from '@/components/CityMap3D';
 
 interface Resident {
   id: string;
@@ -51,14 +52,14 @@ export default function CityMapPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black pt-32 pb-20 px-6">
+    <div className="min-h-screen bg-gradient-to-br from-black via-[#12061A]/20 to-black pt-32 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#2B0727] bg-clip-text text-transparent font-display">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#12061A] bg-clip-text text-transparent font-display">
             City Map
           </h1>
           <p className="text-xl text-gray-400">
@@ -66,33 +67,38 @@ export default function CityMapPage() {
           </p>
         </motion.div>
 
-        {/* 3D Canvas Placeholder */}
-        <div className="relative mb-12 h-[600px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#2B0727]/40 to-black border border-[#BA8E4C]/20">
-          <div className="absolute inset-0 flex items-center justify-center">
+        {/* 3D City Map */}
+        {!loading && residents.length > 0 && (
+          <div className="mb-12">
+            <CityMap3D
+              buildings={residents.map((resident, index) => ({
+                id: resident.id,
+                residentId: resident.id,
+                position: [
+                  (index % 5) * 2 - 4, // X: -4 ~ 4
+                  0.5, // Y: 바닥
+                  Math.floor(index / 5) * 2 - 2, // Z: -2 ~ 2
+                ] as [number, number, number],
+                height: 1 + Math.random() * 2, // 랜덤 높이
+                color: '#12061A',
+                name: resident.name,
+                activity: Math.floor(Math.random() * 100), // 임시 활동 지수
+              }))}
+              onBuildingClick={(buildingId) => {
+                window.location.href = `/profile/${buildingId}`;
+              }}
+            />
+          </div>
+        )}
+        
+        {loading && (
+          <div className="relative mb-12 h-[600px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#12061A]/40 to-black border border-[#BA8E4C]/20 flex items-center justify-center">
             <div className="text-center">
-              <div className="text-8xl mb-4">🏙️</div>
-              <p className="text-2xl text-gray-400 mb-2">3D City Map</p>
-              <p className="text-gray-500">
-                Three.js로 구현 예정 - 건물 클릭 시 각 입주민 페이지로 이동
-              </p>
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#BA8E4C] mx-auto mb-4"></div>
+              <p className="text-gray-400">도시 맵 로딩 중...</p>
             </div>
           </div>
-          
-          {/* 미니맵 오버레이 */}
-          <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur-md rounded-lg p-4 border border-white/10">
-            <h3 className="text-white font-semibold mb-2">발루루체</h3>
-            <div className="grid grid-cols-3 gap-2">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div
-                  key={i}
-                  className="w-16 h-16 bg-white/10 rounded hover:bg-[#2B0727]/40 transition-colors cursor-pointer flex items-center justify-center text-white/60 text-sm"
-                >
-                  {i}층
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        )}
 
         {/* Stats */}
         <div className="grid md:grid-cols-3 gap-6 mb-12">
@@ -135,7 +141,7 @@ export default function CityMapPage() {
                           />
                         </div>
                       ) : (
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#BA8E4C] to-[#2B0727] flex items-center justify-center text-white font-bold">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#BA8E4C] to-[#12061A] flex items-center justify-center text-white font-bold">
                           {resident.name.charAt(0).toUpperCase()}
                         </div>
                       )}

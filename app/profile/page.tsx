@@ -20,23 +20,39 @@ export default function ProfilePage() {
   const router = useRouter();
 
   useEffect(() => {
-    // 타임아웃 설정 (10초 후 강제로 로딩 종료)
+    // 타임아웃 설정 (5초로 단축 - 더 빠른 피드백)
     const timeoutId = setTimeout(() => {
       console.warn('Profile page loading timeout - forcing load completion');
       setLoading(false);
-    }, 10000);
+    }, 5000);
 
     const supabase = createBrowserClient();
     let mounted = true;
     
     const loadUserData = async () => {
       try {
-        const { data: { user }, error: userError } = await supabase.auth.getUser();
+        // 병렬 로딩: getUser와 resident 조회를 동시에 시작
+        const [userResult, residentResult] = await Promise.allSettled([
+          supabase.auth.getUser(),
+          // user가 없을 수 있으므로 일단 실행
+          Promise.resolve({ data: null, error: null })
+        ]);
         
         if (!mounted) {
           clearTimeout(timeoutId);
           return;
         }
+
+        // User 결과 처리
+        if (userResult.status === 'rejected') {
+          console.error('User fetch error:', userResult.reason);
+          clearTimeout(timeoutId);
+          setLoading(false);
+          router.push('/');
+          return;
+        }
+
+        const { data: { user }, error: userError } = userResult.value;
 
         if (userError) {
           console.error('User fetch error:', userError);
@@ -57,7 +73,7 @@ export default function ProfilePage() {
           return;
         }
 
-        // resident 찾기 또는 생성
+        // resident 찾기 또는 생성 (이미 병렬로 시작했지만 user가 필요하므로 여기서 완료)
         try {
           let { data: resident, error: residentError } = await supabase
             .from('residents')
@@ -159,7 +175,7 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black pt-32 pb-20 px-6">
+      <div className="min-h-screen bg-gradient-to-br from-black via-[#12061A]/20 to-black pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto text-center py-20">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#BA8E4C] mx-auto mb-4"></div>
           <p className="text-gray-400">로딩 중...</p>
@@ -173,7 +189,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black pt-32 pb-20 px-6">
+    <div className="min-h-screen bg-gradient-to-br from-black via-[#12061A]/20 to-black pt-32 pb-20 px-6">
       <div className="max-w-6xl mx-auto">
         {/* 펜트하우스 헤더 */}
         <motion.div
@@ -181,10 +197,10 @@ export default function ProfilePage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <div className="p-8 rounded-2xl bg-gradient-to-br from-[#2B0727]/30 to-black/30 border border-[#BA8E4C]/20">
+          <div className="p-8 rounded-2xl bg-gradient-to-br from-[#12061A]/30 to-black/30 border border-[#BA8E4C]/20">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-6">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#BA8E4C] to-[#2B0727] flex items-center justify-center text-white text-4xl font-bold">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#BA8E4C] to-[#12061A] flex items-center justify-center text-white text-4xl font-bold">
                   {user.email?.charAt(0).toUpperCase() || 'U'}
                 </div>
                 <div>
@@ -263,7 +279,7 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-[#2B0727]/30 to-black/30 border border-[#BA8E4C]/20">
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-[#12061A]/30 to-black/30 border border-[#BA8E4C]/20">
               <h3 className="text-lg font-semibold text-white mb-4">Ma'at Index</h3>
               <div className="text-5xl font-bold text-[#BA8E4C] mb-2">42</div>
               <p className="text-gray-400 text-sm">

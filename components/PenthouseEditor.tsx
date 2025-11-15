@@ -188,7 +188,7 @@ export default function PenthouseEditor({ user }: PenthouseEditorProps) {
           <button
             onClick={saveBlocks}
             disabled={saving}
-            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#2B0727] to-[#BA8E4C] rounded-lg text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
+            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#12061A] to-[#BA8E4C] rounded-lg text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
           >
             <Save className="w-4 h-4" />
             {saving ? '저장 중...' : '저장'}

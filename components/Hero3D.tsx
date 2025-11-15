@@ -47,7 +47,7 @@ function GlowBox() {
       <boxGeometry args={[1.5, 1.5, 1.5]} />
       <meshStandardMaterial
         color="#12061A"
-        emissive="#5A4FCF"
+        emissive="#12061A"
         emissiveIntensity={0.8}
         metalness={0.7}
         roughness={0.2}
@@ -110,7 +110,7 @@ export default function Hero3D() {
         <pointLight
           position={[-5, -5, 5]}
           intensity={0.5}
-          color="#5A4FCF"
+          color="#12061A"
         />
         
         {/* 환경 */}

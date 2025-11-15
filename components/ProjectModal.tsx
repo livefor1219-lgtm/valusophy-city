@@ -89,7 +89,7 @@ export default function ProjectModal({ isOpen, onClose, project, user, onApply }
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative bg-gradient-to-br from-black via-[#2B0727]/50 to-black border border-[#BA8E4C]/20 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+          className="relative bg-gradient-to-br from-black via-[#12061A]/50 to-black border border-[#BA8E4C]/20 rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
           <button
@@ -139,7 +139,7 @@ export default function ProjectModal({ isOpen, onClose, project, user, onApply }
                 <button
                   onClick={handleApply}
                   disabled={loading}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-[#2B0727] to-[#BA8E4C] rounded-lg text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full px-6 py-3 bg-gradient-to-r from-[#12061A] to-[#BA8E4C] rounded-lg text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   <Send className="w-5 h-5" />
                   {loading ? '신청 중...' : '프로젝트 신청하기'}

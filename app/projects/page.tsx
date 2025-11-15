@@ -16,11 +16,11 @@ export default function ProjectsPage() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   useEffect(() => {
-    // 타임아웃 설정 (10초 후 강제로 로딩 종료)
+    // 타임아웃 설정 (5초로 단축 - 더 빠른 피드백)
     const timeoutId = setTimeout(() => {
       console.warn('Projects page loading timeout - forcing load completion');
       setLoading(false);
-    }, 10000);
+    }, 5000);
 
     const supabase = createBrowserClient();
     
@@ -93,7 +93,7 @@ export default function ProjectsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black pt-32 pb-20 px-6">
+      <div className="min-h-screen bg-gradient-to-br from-black via-[#12061A]/20 to-black pt-32 pb-20 px-6">
         <div className="max-w-7xl mx-auto text-center py-20">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#BA8E4C] mx-auto mb-4"></div>
           <p className="text-gray-400">로딩 중...</p>
@@ -103,14 +103,14 @@ export default function ProjectsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black pt-32 pb-20 px-6">
+    <div className="min-h-screen bg-gradient-to-br from-black via-[#12061A]/20 to-black pt-32 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#2B0727] bg-clip-text text-transparent">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#12061A] bg-clip-text text-transparent">
             Projects
           </h1>
           <p className="text-xl text-gray-400">
@@ -125,7 +125,7 @@ export default function ProjectsPage() {
             {user && (
               <button 
                 onClick={() => setIsCreateModalOpen(true)}
-                className="px-6 py-3 bg-gradient-to-r from-[#2B0727] to-[#BA8E4C] rounded-lg text-white font-semibold hover:scale-105 transition-transform"
+                className="px-6 py-3 bg-gradient-to-r from-[#12061A] to-[#BA8E4C] rounded-lg text-white font-semibold hover:scale-105 transition-transform"
               >
                 + 새 프로젝트
               </button>
@@ -143,7 +143,7 @@ export default function ProjectsPage() {
                   className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-colors cursor-pointer"
                 >
                   <div className="mb-4">
-                    <div className="w-full h-32 rounded-lg bg-gradient-to-br from-[#2B0727]/30 to-black/30 border border-[#BA8E4C]/20 flex items-center justify-center">
+                    <div className="w-full h-32 rounded-lg bg-gradient-to-br from-[#12061A]/30 to-black/30 border border-[#BA8E4C]/20 flex items-center justify-center">
                       <Rocket className="w-12 h-12 text-[#BA8E4C]" />
                     </div>
                   </div>
@@ -182,7 +182,7 @@ export default function ProjectsPage() {
                       {members.slice(0, 5).map((member: any, idx: number) => (
                         <div
                           key={idx}
-                          className="w-8 h-8 rounded-full bg-gradient-to-br from-[#BA8E4C] to-[#2B0727] flex items-center justify-center text-white text-sm font-bold"
+                          className="w-8 h-8 rounded-full bg-gradient-to-br from-[#BA8E4C] to-[#12061A] flex items-center justify-center text-white text-sm font-bold"
                           title={member.residents?.name || member.residents?.email || 'Unknown'}
                         >
                           {(member.residents?.name || member.residents?.email || 'U').charAt(0).toUpperCase()}

@@ -123,9 +123,9 @@ valusophy-city/
 - 빛의 반사감 강조
 
 ### 컬러 팔레트
-- **Primary**: Purple (#2B0727)
+- **Primary**: Purple (#12061A)
 - **Secondary/Accent**: Beige (#BA8E4C)
-- **Background**: Black / Purple (#2B0727) gradients
+- **Background**: Black / Purple (#12061A) gradients
 
 ## 📊 데이터베이스 구조
 

@@ -132,7 +132,7 @@ export default function UploadPost({ onSuccess }: UploadPostProps) {
             }}
             className={`flex-1 p-3 rounded-lg border transition-colors flex flex-col items-center gap-2 ${
               type === 'image'
-                ? 'bg-[#2B0727]/30 border-[#BA8E4C]/20 text-white'
+                ? 'bg-[#12061A]/30 border-[#BA8E4C]/20 text-white'
                 : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'
             }`}
           >
@@ -148,7 +148,7 @@ export default function UploadPost({ onSuccess }: UploadPostProps) {
             }}
             className={`flex-1 p-3 rounded-lg border transition-colors flex flex-col items-center gap-2 ${
               type === 'video'
-                ? 'bg-[#2B0727]/30 border-[#BA8E4C]/20 text-white'
+                ? 'bg-[#12061A]/30 border-[#BA8E4C]/20 text-white'
                 : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'
             }`}
           >
@@ -164,7 +164,7 @@ export default function UploadPost({ onSuccess }: UploadPostProps) {
             }}
             className={`flex-1 p-3 rounded-lg border transition-colors flex flex-col items-center gap-2 ${
               type === 'text'
-                ? 'bg-[#2B0727]/30 border-[#BA8E4C]/20 text-white'
+                ? 'bg-[#12061A]/30 border-[#BA8E4C]/20 text-white'
                 : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'
             }`}
           >
@@ -249,7 +249,7 @@ export default function UploadPost({ onSuccess }: UploadPostProps) {
           <button
             type="submit"
             disabled={loading || !title}
-            className="flex-1 px-6 py-3 bg-gradient-to-r from-[#2B0727] to-[#BA8E4C] rounded-lg text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
+            className="flex-1 px-6 py-3 bg-gradient-to-r from-[#12061A] to-[#BA8E4C] rounded-lg text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
           >
             {loading ? (
               <>

@@ -5,7 +5,7 @@ import { Sparkles, Heart, Globe, Lightbulb } from 'lucide-react';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black pt-32 pb-20 px-6">
+    <div className="min-h-screen bg-gradient-to-br from-black via-[#12061A]/20 to-black pt-32 pb-20 px-6">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -13,7 +13,7 @@ export default function AboutPage() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#2B0727] bg-clip-text text-transparent">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#BA8E4C] to-[#12061A] bg-clip-text text-transparent">
             About Valusophy
           </h1>
           <p className="text-xl text-gray-400">
@@ -54,7 +54,7 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-2 h-2 rounded-full bg-[#2B0727] mt-2 flex-shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-[#12061A] mt-2 flex-shrink-0" />
                 <div>
                   <strong className="text-white">커뮤니티 협업</strong>
                   <p className="text-gray-400">같은 관심사를 가진 사람들과 협업하고 함께 성장합니다.</p>
@@ -70,7 +70,7 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section className="p-8 rounded-2xl bg-gradient-to-br from-[#2B0727]/30 to-black/30 border border-[#BA8E4C]/20">
+          <section className="p-8 rounded-2xl bg-gradient-to-br from-[#12061A]/30 to-black/30 border border-[#BA8E4C]/20">
             <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
               <Lightbulb className="w-8 h-8 text-[#BA8E4C]" />
               발루루체의 의미

@@ -62,10 +62,10 @@ export async function POST(request: NextRequest) {
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
         <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5; padding: 20px;">
-          <div style="max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #2B0727 0%, #BA8E4C 100%); padding: 40px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
+          <div style="max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #12061A 0%, #BA8E4C 100%); padding: 40px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
             
             <div style="background-color: white; padding: 40px; border-radius: 8px;">
-              <h1 style="color: #333; font-size: 28px; margin-bottom: 10px; background: linear-gradient(135deg, #BA8E4C 0%, #2B0727 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+              <h1 style="color: #333; font-size: 28px; margin-bottom: 10px; background: linear-gradient(135deg, #BA8E4C 0%, #12061A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
                 🏙️ 발루소사이어시티 입주 신청
               </h1>
               

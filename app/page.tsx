@@ -8,7 +8,7 @@ import Hero3D from '@/components/Hero3D';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-[#2B0727]/20 to-black">
+    <div className="min-h-screen bg-gradient-to-br from-black via-[#12061A]/20 to-black">
       <Navigation />
       
       <main className="pt-20 pb-20 px-6">
@@ -128,7 +128,7 @@ function StatCard({ number, label }: { number: string; label: string }) {
       transition={{ duration: 0.5 }}
       className="text-center"
     >
-      <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-[#BA8E4C] to-[#2B0727] bg-clip-text text-transparent mb-2">
+      <div className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-[#BA8E4C] to-[#12061A] bg-clip-text text-transparent mb-2">
         {number}
       </div>
       <div className="text-gray-400">{label}</div>
